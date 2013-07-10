@@ -13,36 +13,42 @@ First, add the project in the `library` folder to your project as a library proj
 
 Add the widget to your XML layout like so:
 
-    <net.robertli.android.contactsedittext.ContactsEditText
-        android:id="@android:id/input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName" />
+```XML
+<net.robertli.android.contactsedittext.ContactsEditText
+    android:id="@android:id/input"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="textPersonName" />
+```
 
 In your Java code, set its `onItemClickListener`:
 
-    ContactsEditText editText = (ContactsEditText) findViewById(android.R.id.input);
-    editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                long id) {
-            ContactsEditText.Contact contact =
-                    (ContactsEditText.Contact) parent.getItemAtPosition(position);
-            
-            // Do something with the contact entry
+```Java
+ContactsEditText editText = (ContactsEditText) findViewById(android.R.id.input);
+editText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+            long id) {
+        ContactsEditText.Contact contact =
+                (ContactsEditText.Contact) parent.getItemAtPosition(position);
 
-            editText.setText("");
-        }
-    });
+        // Do something with the contact entry
 
-Note that the ContactsEditText.Contact class is just a holder class. It contains the following fields:
-
-    public class Contact {
-        public String displayName; // ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
-        public Bitmap image;       // ContactsContract.Contacts.PHOTO_THUMBNAIL_URI
-        public long   id;          // ContactsContract.Contacts._ID
-        public String lookupKey;   // ContactsContract.Contacts.LOOKUP_KEY
+        editText.setText("");
     }
+});
+```
+
+Note that the `ContactsEditText.Contact` class is just a holder class. It contains the following fields:
+
+```Java
+public class Contact {
+    public String displayName; // ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
+    public Bitmap image;       // ContactsContract.Contacts.PHOTO_THUMBNAIL_URI
+    public long   id;          // ContactsContract.Contacts._ID
+    public String lookupKey;   // ContactsContract.Contacts.LOOKUP_KEY
+}
+```
 
 You'll notice that in the example listener above, I clear the text of the widget. This isn't necessary, and if you don't clear it, it will separate entries by commas.
 
