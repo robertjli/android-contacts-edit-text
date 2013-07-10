@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="dropdown_item_padding">10dp</dimen>
+    <dimen name="dropdown_item_height">48dp</dimen>
+
+</resources>
